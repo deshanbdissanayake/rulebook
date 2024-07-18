@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
       height: 40,
     },
     borderStyles: {
-      borderWidth: 1, 
+      borderWidth: 0.3, 
       borderColor: colors.border, 
-      borderRadius: 10, 
-      height: 50,
-      width: 50,
+      borderRadius: 5, 
+      height: 45,
+      width: 45,
     },
 })

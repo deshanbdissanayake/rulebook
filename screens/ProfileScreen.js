@@ -1,13 +1,13 @@
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useCallback, useState } from 'react'
-import Header from '../../components/general/Header'
+import Header from '../components/general/Header'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
-import { alignCenter, borderBottom, borderTop, borderVertical, container, flex1, flex2, flex4, flexRow, justifyBetween, marginBottom10, marginBottom15, marginBottom5, marginHorizontal15, marginTop10, marginTop15, marginVertical10, marginVertical15, paddingBottom15, paddingHorizontal10, paddingHorizontal15, paddingVertical10, textAlignLeft, textLight12, textLight14, textRegular14, textSemiBold14, w100 } from '../../assets/commonStyles'
-import { getProfileData } from '../../assets/data/user'
-import LoadingScreen from '../LoadingScreen'
-import { colors } from '../../assets/colors/colors'
-import Subtitle from '../../components/general/Subtitle'
-import Button from '../../components/general/Button'
+import { alignCenter, borderBottom, borderTop, borderVertical, container, flex1, flex2, flex4, flexRow, justifyBetween, marginBottom10, marginBottom15, marginBottom5, marginHorizontal15, marginTop10, marginTop15, marginVertical10, marginVertical15, paddingBottom15, paddingHorizontal10, paddingHorizontal15, paddingVertical10, textAlignLeft, textLight12, textLight14, textRegular14, textSemiBold14, w100 } from '../assets/commonStyles'
+import { getProfileData } from '../assets/data/user'
+import LoadingScreen from './LoadingScreen'
+import { colors } from '../assets/colors/colors'
+import Subtitle from '../components/general/Subtitle'
+import Button from '../components/general/Button'
 
 const ProfileScreen = () => {
     const navigation = useNavigation();

@@ -11,7 +11,6 @@ import { colors } from './assets/colors/colors';
 
 import SplashScreen from './screens/SplashScreen';
 import LoginNav from './navigation/LoginNav';
-import BottomNav from './navigation/BottomNav';
 import DrawerNav from './navigation/DrawerNav';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -54,23 +53,17 @@ const App = () => {
 }
 
 const AppContent = () => {
-  const { isLoggedIn, navType, themeColor } = useAppContext();
+  const { isLoggedIn } = useAppContext();
 
   return (
     <SafeAreaView style={styles.container}>
       <GestureHandlerRootView style={styles.container}>
-        <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+        <StatusBar backgroundColor={colors.bgColorPri} barStyle="light-content" />
         <Stack.Navigator>
           {!isLoggedIn ? (
             <Stack.Screen name="LoginNav" component={LoginNav} options={{headerShown: false}} />
           ) : (
-            <>
-              {navType == 'drawer' ? (
-                <Stack.Screen name="DrawerNav" component={DrawerNav} options={{headerShown: false}} />
-              ) : (
-                <Stack.Screen name="BottomNav" component={BottomNav} options={{headerShown: false}} />
-              )}
-            </>
+            <Stack.Screen name="DrawerNav" component={DrawerNav} options={{headerShown: false}} />
           )}
         </Stack.Navigator>
       </GestureHandlerRootView>

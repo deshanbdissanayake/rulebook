@@ -1,7 +1,7 @@
 const colorsLight = {
-    bgColor: '#FFFFFF',
-    bgColorSec: '#373737',
-    bgColorTer: '#f2f2f2',
+    bgColorPri: '#FFFFFF',
+    bgColorPriSec: '#373737',
+    bgColorPriTer: '#f2f2f2',
 
     textColorPri: '#474747',
     textColorSec: '#ffffff',
@@ -36,9 +36,9 @@ const colorsLight = {
 }
 
 const colorsDark = {
-  bgColor: '#373737',
-  bgColorSec: '#FFFFFF',
-  bgColorTer: '#f2f2f2',
+  bgColorPri: '#373737',
+  bgColorPriSec: '#FFFFFF',
+  bgColorPriTer: '#f2f2f2',
 
   textColorPri: '#fff7fa',
   textColorSec: '#373737',
@@ -72,7 +72,7 @@ const colorsDark = {
 }
 
 const getThemeColors = () => {
-  let theme = 'light'; // get from async storage
+  let theme = 'dark'; // get from async storage
 
   if (theme === 'light') {
     return colorsLight;

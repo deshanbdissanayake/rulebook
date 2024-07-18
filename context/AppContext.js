@@ -4,9 +4,9 @@ import React, { createContext, useState, useContext } from 'react';
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [navType, setNavType] = useState('bottom-tab');
+  const [navType, setNavType] = useState('drawer');
   const [userType, setUserType] = useState(null); //customer/vendor
 
   return (

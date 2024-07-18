@@ -18,7 +18,6 @@ import { FontAwesome5, Ionicons } from 'react-native-vector-icons';
 import { colors } from '../assets/colors/colors';
 import HomeNav from './HomeNav';
 import { useAppContext } from '../context/AppContext';
-import { logOut } from '../assets/data/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SettingsNav from './SettingsNav';
 

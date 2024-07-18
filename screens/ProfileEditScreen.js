@@ -1,16 +1,16 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert } from 'react-native'
 import React, { useCallback, useState } from 'react'
-import Header from '../../components/general/Header'
+import Header from '../components/general/Header'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker';
-import LoadingScreen from '../LoadingScreen'
-import { getProfileData, updateProfileData } from '../../assets/data/user'
+import LoadingScreen from './LoadingScreen'
+import { getProfileData, updateProfileData } from '../assets/data/user'
 import { AntDesign } from '@expo/vector-icons'
-import Input from '../../components/general/Input'
-import { colors } from '../../assets/colors/colors'
-import { borderTop, container, labelTextStyles, marginBottom10, marginBottom5, marginTop15, marginVertical15, paddingTop10, paddingTop15, textRegular14 } from '../../assets/commonStyles';
-import Subtitle from '../../components/general/Subtitle';
-import Button from '../../components/general/Button';
+import Input from '../components/general/Input'
+import { colors } from '../assets/colors/colors'
+import { borderTop, container, labelTextStyles, marginBottom10, marginBottom5, marginTop15, marginVertical15, paddingTop10, paddingTop15, textRegular14 } from '../assets/commonStyles';
+import Subtitle from '../components/general/Subtitle';
+import Button from '../components/general/Button';
 
 const ProfileEditScreen = () => {
     const navigation = useNavigation();
