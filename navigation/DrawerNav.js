@@ -10,7 +10,8 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert
+  Alert,
+  Image
 } from 'react-native';
 import { FontAwesome5, Ionicons } from 'react-native-vector-icons'; 
 
@@ -20,6 +21,10 @@ import HomeNav from './HomeNav';
 import { useAppContext } from '../context/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SettingsNav from './SettingsNav';
+import QuoteNav from './QuoteNav';
+import CollectionNav from './CollectionNav';
+import FavouritesNav from './FavouritesNav';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Drawer = createDrawerNavigator();
 
@@ -63,14 +68,16 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
       <View style={styles.drawerTopWrapper}>
         <View style={styles.profileSection}>
           <View style={styles.profileImageWrapper}>
-            <FontAwesome5 name="user" size={50} color={colors.textColorPri} />
+            <Image
+              source={require('../assets/images/logo_full_white.png')}
+              style={styles.profileImageStyles}
+            />
           </View>
           <View style={styles.profileTextWrapper}>
-            <Text style={styles.profileText}>Hi Guest</Text>
-            <Text style={styles.profilePhone}>0711500200</Text>
+            <Text style={styles.profileText}>Hello Desh</Text>
           </View>
           <TouchableOpacity style={styles.drawerClose} onPress={closeDrawer} >
-            <Ionicons name="close" size={24} color={colors.textColorSec} />
+            <Ionicons name="close" size={24} color={colors.textColorPri} />
           </TouchableOpacity>
         </View>
 
@@ -84,14 +91,14 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
       <View style={styles.drawerBottomWrapper}>
         <DrawerItem
           label="Logout"
-          labelStyle={{color: colors.textColorSec, fontFamily: 'ms-regular'}}
+          labelStyle={{color: colors.textColorPri, fontFamily: 'ms-regular'}}
           onPress={handleLogoutClick}
           icon={({ size }) => (
-            <Ionicons name="log-out-outline" size={size} color={colors.textColorSec} />
+            <Ionicons name="log-out-outline" size={size} color={colors.textColorPri} />
           )}
         />
         <View style={styles.devInfoTextWrapper}>
-          <Text style={styles.devInfoTextStyles}>Developed by Introps IT</Text>
+          <Text style={styles.devInfoTextStyles}>Developed by Desh</Text>
           <Text style={styles.versionTextStyles}>V.1.0</Text>
         </View>
       </View>
@@ -107,8 +114,8 @@ const DraverNav = () => {
       initialRouteName="Dash"
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
-        drawerActiveTintColor: colors.textColorTer,
-        drawerInactiveTintColor: colors.textColorSec,
+        drawerActiveTintColor: colors.textColorPri,
+        drawerInactiveTintColor: colors.textColorPri,
       }}
     >
       <Drawer.Screen
@@ -120,6 +127,54 @@ const DraverNav = () => {
           drawerIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? 'home' : 'home-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Rules"
+        component={QuoteNav}
+        options={{
+          drawerLabel: 'Rules',
+          drawerLabelStyle: { fontFamily: 'ms-regular' },
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? 'add-circle' : 'add-circle-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Collections"
+        component={CollectionNav}
+        options={{
+          drawerLabel: 'Collections',
+          drawerLabelStyle: { fontFamily: 'ms-regular' },
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? 'copy' : 'copy-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Favourites"
+        component={FavouritesNav}
+        options={{
+          drawerLabel: 'Favourites',
+          drawerLabelStyle: { fontFamily: 'ms-regular' },
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? 'heart' : 'heart-outline'}
               size={size}
               color={color}
             />
@@ -153,8 +208,8 @@ const styles = StyleSheet.create({
   drawerWrapper:{
     flex: 1,
     justifyContent: 'space-between',
-    backgroundColor: colors.bgColorSec,
-    color: colors.textColorSec,
+    backgroundColor: colors.bgColorPri,
+    color: colors.textColorPri,
   },
   drawerTopWrapper:{
     flex: 11,
@@ -162,36 +217,35 @@ const styles = StyleSheet.create({
   drawerBottomWrapper:{
     flex: 2,
     borderTopWidth: 1,
-    borderTopColor: colors.textColorTer,
+    borderTopColor: colors.textColorPri,
     margin: 10,
   },
   profileSection:{
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.textColorTer,
     paddingVertical: 5,
     margin: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.textColorPri,
   },
   profileImageWrapper:{
     backgroundColor: colors.bgColor,
-    padding: 25,
+    paddingTop: 35,
+    paddingBottom: 10,
     borderRadius: 50,
-    margin: 10,
+  },
+  profileImageStyles: {
+    width: 180,
+    height: 40,
+    resizeMode: 'contain',
   },
   profileTextWrapper:{
-    marginBottom: 5,
+    marginBottom: 15,
   },
   profileText:{
-    fontFamily: 'ms-bold',
+    fontFamily: 'ms-semibold',
     fontSize: 18,
-    color: colors.textColorSec,
+    color: colors.textColorPri,
     textAlign: 'center',
-  },
-  profilePhone:{
-    fontSize: 12,
-    color: colors.textColorSec,
-    textAlign: 'center',
-    fontFamily: 'ms-regular',
   },
   drawerClose:{
     position: 'absolute',
@@ -208,12 +262,12 @@ const styles = StyleSheet.create({
   devInfoTextStyles: {
     fontFamily: 'ms-light',
     fontSize: 10,
-    color: colors.textColorSec,
+    color: colors.textColorPri,
   },
   versionTextStyles: {
     marginTop: 5,
     fontFamily: 'ms-light',
     fontSize: 8,
-    color: colors.textColorSec,
+    color: colors.textColorPri,
   },
 })
