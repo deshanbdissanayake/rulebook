@@ -7,6 +7,7 @@ import MiniButton from '../components/general/MiniButton'
 import { Entypo } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 import { DrawerActions } from '@react-navigation/native';
+import { marginRight10 } from '../assets/commonStyles'
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -14,6 +15,14 @@ const HomeScreen = () => {
 
   const hanldeDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
+  }
+
+  const hanldeNewQuote = () => {
+    console.log('new quote');
+  }
+
+  const hanldeAddToFav = () => {
+    console.log('fav');
   }
 
   if(loading){
@@ -31,6 +40,21 @@ const HomeScreen = () => {
         />
       </View>
       <RuleSlider />
+      <View style={styles.favBtnWrapper}>
+        <MiniButton
+          func={hanldeNewQuote}
+          content={<Entypo name="plus" size={24} color={colors.textColorPri} />}
+          bgColor={colors.bgColorPri}
+          btnStyles={true}
+          wrapperStyles={[marginRight10]}
+        />
+        <MiniButton
+          func={hanldeAddToFav}
+          content={<Entypo name="heart" size={24} color={colors.textColorPri} />}
+          bgColor={colors.bgColorPri}
+          btnStyles={true}
+        />
+      </View>
     </View>
   )
 }
@@ -51,6 +75,7 @@ const styles = StyleSheet.create({
   },
   favBtnWrapper:{
     position: 'absolute',
+    flexDirection: 'row',
     bottom: 15,
     right: 15,
     zIndex: 1,
