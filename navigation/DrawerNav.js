@@ -135,10 +135,10 @@ const DraverNav = () => {
         }}
       />
       <Drawer.Screen
-        name="Rules"
+        name="Quotes"
         component={QuoteNav}
         options={{
-          drawerLabel: 'Rules',
+          drawerLabel: 'Quotes',
           drawerLabelStyle: { fontFamily: 'ms-regular' },
           drawerIcon: ({ focused, color, size }) => (
             <Ionicons

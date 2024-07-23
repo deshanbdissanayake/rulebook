@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Alert } fr
 import React from 'react'
 import { colors } from '../../assets/colors/colors'
 
-const Button = ({bgColor, content, func, bdr='', loading = false, loaderIconColor = colors.textColorPri,  paddingStt = true, btnDisabled = false, errorMessage = "Error", itemPosition = 'center'}) => {
+const Button = ({bgColor, content, func, bdr='', loading = false, loaderIconColor = colors.textColorPri,  paddingStt = true, btnDisabled = false, errorMessage = "Error", itemPosition = 'center', wrapperStyles = []}) => {
 
   //to show an alert to the user why button is disabled
   const showAlert = (msg) => {
@@ -20,7 +20,7 @@ const Button = ({bgColor, content, func, bdr='', loading = false, loaderIconColo
   return (
     <>
       {loading ? (
-        <View style={[styles.buttonWrapper, {backgroundColor: colors.border}]}>
+        <View style={[styles.buttonWrapper, {backgroundColor: colors.border}, wrapperStyles]}>
           <View style={styles.buttonText}>
             <ActivityIndicator size={24} color={loaderIconColor} />
           </View>
@@ -32,7 +32,8 @@ const Button = ({bgColor, content, func, bdr='', loading = false, loaderIconColo
               style={[
                 styles.buttonWrapper,
                 {alignItems: itemPosition},
-                { backgroundColor: bgColor, borderWidth: bdr === '' ? 0 : 1, borderColor: bdr === '' ? 'transparent' : bdr }
+                { backgroundColor: bgColor, borderWidth: bdr === '' ? 0 : 1, borderColor: bdr === '' ? 'transparent' : bdr },
+                wrapperStyles
               ]}
               onPress={func}
             >
