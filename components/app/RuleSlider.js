@@ -16,17 +16,31 @@ const RuleSlider = () => {
   const width = Dimensions.get('window').width;
   const height = Dimensions.get('window').height;
 
-  const [quotes, setQuotes] = useState(null);
+  const [quotes, setQuotes] = useState([]); 
   const [loading, setLoading] = useState(true);
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [quoteId, setQuoteId] = useState(0);
   
-  useEffect(()=>{
+  useEffect(() => {
     getData();
-  },[])
+  }, []);
+  
+  useEffect(() => {
+    if (quotes.length > 0) {
+      const index = quoteIndex;
+      if (index >= 0 && index < quotes.length) {
+        setQuoteId(quotes[index].id);
+      }
+    }
+  }, [quoteIndex, quotes]);
 
   const getData = async () => {
     try {
       let quotesData = await getAllRules();
-      setQuotes(quotesData)
+      if(quotesData && quotesData.length > 0){
+        setQuotes(quotesData)
+        setQuoteId(quotesData[0].id);
+      }
     } catch (error) {
       console.error('Error at RuleSlider.js: ', error)
     } finally {
@@ -64,6 +78,7 @@ const RuleSlider = () => {
           renderItem={({ item }) => (
             <RuleComponent data={item} />
           )}
+          onSnapToItem={(index) => setQuoteIndex(index)}
         />
       )}
       <View style={styles.addBtnWrapper}>
@@ -77,14 +92,14 @@ const RuleSlider = () => {
       <View style={styles.favBtnWrapper}>
         <MiniButton
           func={hanldeAddToCollection}
-          content={<Ionicons name="copy" size={24} color={colors.textColorPri} />}
+          content={<Ionicons name="copy-outline" size={24} color={colors.textColorPri} />}
           bgColor={colors.bgColorPri}
           btnStyles={true}
           wrapperStyles={[marginRight10]}
         />
         <MiniButton
           func={hanldeAddToFavourites}
-          content={<Entypo name="heart" size={24} color={colors.textColorPri} />}
+          content={<Ionicons name="heart-outline" size={24} color={colors.textColorPri} />}
           bgColor={colors.bgColorPri}
           btnStyles={true}
         />
