@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors } from '../assets/colors/colors'
 import Header from '../components/general/Header'
@@ -50,7 +50,7 @@ const QuoteAddScreen = () => {
                 handleGoBack={handleGoBack}
             />
             <View style={styles.formWrapper}>
-                <View>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <Text style={styles.labelTextStyles}>Add your personal quotes below to keep yourself on track !</Text>
                     <Input
                         keyboardType={'default'}
@@ -74,7 +74,7 @@ const QuoteAddScreen = () => {
                             itemName={'collections'}
                         />
                     )}
-                </View>
+                </ScrollView>
                 <Button
                     bgColor={colors. bgColorSec}
                     content={<Text style={styles.btnTextStyles}>{(route.params ? 'Edit' : 'Add')}</Text>}
