@@ -1,9 +1,13 @@
 import { StyleSheet, TextInput, View, Pressable } from "react-native";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { colors } from "../../assets/colors/colors";
+import { Feather } from "@expo/vector-icons";
+import MiniButton from "./MiniButton";
 
 const Input = ({keyboardType, value, onChangeText, placeholder, secureTextEntry, icon, editable, multiline, textArea, maxLength, disabled, borderColor = colors.border, capitalize='sentences', center = false, wrapperStyles = []}) => {
     const inputRef = useRef(null);
+
+    const [secureText, setSecureText] = useState(secureTextEntry);
 
     const handleInputWrapperClick = () => {
         if (inputRef.current) {
@@ -27,7 +31,7 @@ const Input = ({keyboardType, value, onChangeText, placeholder, secureTextEntry,
                     value={value}
                     onChangeText={onChangeText}
                     placeholder={placeholder}
-                    secureTextEntry={secureTextEntry}
+                    secureTextEntry={secureText}
                     style={[
                         styles.inputTextStyles, 
                         disabled && { color: colors.textColorPri, fontFamily: 'ms-light' },
@@ -41,6 +45,16 @@ const Input = ({keyboardType, value, onChangeText, placeholder, secureTextEntry,
                     autoCapitalize={capitalize}
                     autoCorrect={false}
                 />
+                {secureTextEntry && (
+                    <View style={styles.pwShowIconStyles}>
+                        <MiniButton
+                            func={(() => setSecureText(!secureText))}
+                            content={
+                                secureText ? (<Feather name="eye-off" size={24} color={colors.textColorPri} />) : (<Feather name="eye" size={24} color={colors.textColorPri} />)
+                            }
+                        />
+                    </View>
+                )}
             </View>
         </Pressable>
     );
@@ -62,5 +76,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.textColorPri,
         width: '100%',
+    },
+    pwShowIconStyles: {
+        position: 'absolute',
+        right: 0,
+        zIndex: 1,
     },
 });
