@@ -1,5 +1,6 @@
 // AppContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { getAsyncData } from '../assets/data/async_storage';
 
 const AppContext = createContext();
 
@@ -8,6 +9,23 @@ export const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [navType, setNavType] = useState('drawer');
   const [userType, setUserType] = useState(null); //customer/vendor
+
+  useEffect(()=>{
+    checkUserExist();
+  },[])
+
+  const checkUserExist = async () => {
+    try {
+        let res = await getAsyncData('username');
+        if (res) { // Check if `res` is not null or undefined
+            setIsLoggedIn(true); // Update the logged-in state
+        } else {
+            setIsLoggedIn(false); // Optionally handle the case when no user exists
+        }
+    } catch (error) {
+        console.error('Error at AppContext.js -> checkUserExist: ', error);
+    }
+  };
 
   return (
     <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, navType, setNavType, userType, setUserType }}>

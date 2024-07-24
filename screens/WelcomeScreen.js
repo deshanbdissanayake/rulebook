@@ -1,15 +1,15 @@
 import { Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { colors } from '../assets/colors/colors'
 import Input from '../components/general/Input'
 import { marginTop15 } from '../assets/commonStyles'
 import Button from '../components/general/Button'
 import { loginFunc } from '../assets/data/auth'
 import { useAppContext } from '../context/AppContext';
+import LoadingScreen from './LoadingScreen'
 
 const WelcomeScreen = () => {
   const { setIsLoggedIn } = useAppContext();
-
 
   const [btnLoading, setBtnLoading] = useState(false);
   const [username, setUsername] = useState(null);
@@ -36,6 +36,7 @@ const WelcomeScreen = () => {
       setBtnLoading(false); // Always reset the button loading state
     }
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.imgWrapper}>

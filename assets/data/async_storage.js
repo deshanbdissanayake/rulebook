@@ -41,4 +41,13 @@ const getAllAsyncData = async () => {
     }
 };
 
-export { setAsyncData, getAsyncData, getAllAsyncData };
+const deleteAsyncData = async (key) => {
+    try {
+        await AsyncStorage.removeItem(key);
+        console.log('Data successfully deleted');
+    } catch (error) {
+        console.error('Error occurred while deleting AsyncStorage data: ', error);
+    }
+};
+
+export { setAsyncData, getAsyncData, getAllAsyncData, deleteAsyncData };
