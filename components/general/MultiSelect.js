@@ -5,7 +5,7 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import { colors } from '../../assets/colors/colors';
 import { textRegular14 } from '../../assets/commonStyles';
 
-const MultiSelect = ({ value, onSelect, placeholder, icon, options }) => {
+const MultiSelect = ({ value, onSelect, placeholder, icon, options, wrapperStyles = [], itemName = 'options' }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedOptions, setSelectedOptions] = useState(null);
 
@@ -48,7 +48,7 @@ const MultiSelect = ({ value, onSelect, placeholder, icon, options }) => {
                 </Text>
                 {isSelected && (
                     <View style={styles.selectedCheckWrapper}>
-                        <AntDesign name="checkcircle" size={24} color={colors.success} />
+                        <AntDesign name="checkcircle" size={24} color={colors.textColorPri} />
                     </View>
                 )}
             </TouchableOpacity>
@@ -60,13 +60,13 @@ const MultiSelect = ({ value, onSelect, placeholder, icon, options }) => {
     };
 
     return (
-        <View>
+        <View style={wrapperStyles}>
             <TouchableWithoutFeedback onPress={() => setShowDropdown(true)}>
                 <View style={styles.selectWrapper}>
                     <View style={styles.selectLeftWrapper}>
                         {icon}
                         <Text style={styles.selectText} numberOfLines={1}>
-                            {selectedOptions ? `${selectedOptions.length} options selected` : placeholder}
+                            {(selectedOptions && selectedOptions != 0) ? `${selectedOptions.length} ${itemName} selected` : placeholder}
                         </Text>
                     </View>
                     <View style={styles.selectRightWrapper}>
@@ -94,7 +94,7 @@ const MultiSelect = ({ value, onSelect, placeholder, icon, options }) => {
                                     )}
                                 </ScrollView>
                                 <TouchableOpacity style={styles.doneBtnWrapper} onPress={closeModal}>
-                                    <Text style={[textRegular14, {color: colors.textColorSec}]}>Done</Text>
+                                    <Text style={[textRegular14, {color: colors.textColorPri}]}>Done</Text>
                                 </TouchableOpacity>
                             </View>
                         </TouchableWithoutFeedback>
@@ -142,8 +142,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     selectText: {
+        marginLeft: 10,
         fontSize: 14,
-        fontFamily: 'ms-light',
+        fontFamily: 'ms-regular',
         color: colors.textColorPri,
         width: '100%',
     },
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     },
     selectedOptions: {
         borderRadius: 5,
-        backgroundColor: colors.gray,
+        backgroundColor: colors.bgColorTer,
     },
     modalContainer: {
         flex: 1,
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
     modalContent: {
         width: 300,
         maxHeight: 400,
-        backgroundColor: colors.white,
+        backgroundColor: colors.bgColorPri,
         borderRadius: 5,
     },
     doneBtnWrapper: {
@@ -189,9 +190,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.bgColorSec,
+        backgroundColor: colors.bgColorTer,
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
+        borderTopWidth: 1,
+        borderTopColor: colors.textColorPri,
     },
 });
 

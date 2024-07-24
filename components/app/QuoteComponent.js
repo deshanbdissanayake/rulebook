@@ -2,15 +2,20 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../assets/colors/colors'
 
-const RuleComponent = ({data}) => {
+const QuoteComponent = ({data}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.ruleTextStyles}>{data.quote}</Text>
+      <Text style={styles.quoteTextStyles}>{data.quote}</Text>
+      {
+        (data.author && data.author != '') && (
+          <Text style={styles.quoteAuthorTextStyles}>~ {data.author} ~</Text>
+        )
+      }
     </View>
   )
 }
 
-export default RuleComponent
+export default QuoteComponent
 
 const styles = StyleSheet.create({
     container: {
@@ -20,10 +25,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 50,
     },
-    ruleTextStyles: {
+    quoteTextStyles: {
         fontSize: 24,
         fontFamily: 'ms-regular',
         color: colors.textColorPri,
         textAlign: 'center',
+    },
+    quoteAuthorTextStyles: {
+        fontSize: 14,
+        fontFamily: 'ms-regular',
+        color: colors.textColorPri,
+        textAlign: 'center',
+        marginTop: 10,
     },
 })

@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { colors } from '../assets/colors/colors'
 import Header from '../components/general/Header'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Input from '../components/general/Input'
 import { marginTop15 } from '../assets/commonStyles'
 import Button from '../components/general/Button'
+import MultiSelect from '../components/general/MultiSelect'
+import { getAllCollections } from '../assets/data/collections'
+import LoadingScreen from './LoadingScreen'
 
 const QuoteAddScreen = () => {
     const navigation = useNavigation();
@@ -15,7 +18,30 @@ const QuoteAddScreen = () => {
         navigation.goBack();
     }
 
-    const [quote, setQuote] = useState();
+    const [loading, setLoading] = useState(true);
+    const [quote, setQuote] = useState(null);
+    const [author, setAuthor] = useState(null);
+    const [cols, setCols] = useState([]); //collections
+    const [selectedCols, setSelectedCols] = useState([]); //collections
+
+    useEffect(()=>{
+        getData();
+    },[])
+
+    const getData = async () => {
+        try {
+            let data = await getAllCollections();
+            setCols(data);
+        } catch (error) {
+            console.error('error at QuoteAddScreen.js: ', error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    if(loading){
+        return <LoadingScreen/>
+    }
 
     return (
         <View style={styles.container}>
@@ -35,13 +61,22 @@ const QuoteAddScreen = () => {
                     />
                     <Input
                         keyboardType={'default'}
-                        onChangeText={(text) => setQuote(text)}
+                        onChangeText={(text) => setAuthor(text)}
                         placeholder={'Enter Author (optional)'}
                         wrapperStyles={marginTop15}
                     />
+                    {(cols && cols.length) > 0 && (
+                        <MultiSelect
+                            options={cols}
+                            wrapperStyles={marginTop15}
+                            onSelect={(values) => setSelectedCols(values)}
+                            placeholder={'Select Collections (optional)'}
+                            itemName={'collections'}
+                        />
+                    )}
                 </View>
                 <Button
-                    bgColor={colors. bgColorPriSec}
+                    bgColor={colors. bgColorSec}
                     content={<Text style={styles.btnTextStyles}>{(route.params ? 'Edit' : 'Add')}</Text>}
                 />
             </View>

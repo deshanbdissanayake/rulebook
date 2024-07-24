@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Carousel from 'react-native-reanimated-carousel';
 import { useNavigation } from '@react-navigation/native'
 import LoadingScreen from '../../screens/LoadingScreen';
-import RuleComponent from './RuleComponent';
-import { getAllRules } from '../../assets/data/rules';
+import QuoteComponent from './QuoteComponent';
+import { getAllQuotes } from '../../assets/data/quotes';
 import { colors } from '../../assets/colors/colors'
 import MiniButton from '../general/MiniButton'
 
@@ -36,7 +36,7 @@ const RuleSlider = () => {
 
   const getData = async () => {
     try {
-      let quotesData = await getAllRules();
+      let quotesData = await getAllQuotes();
       if(quotesData && quotesData.length > 0){
         setQuotes(quotesData)
         setQuoteId(quotesData[0].id);
@@ -76,7 +76,7 @@ const RuleSlider = () => {
           data={quotes}
           scrollAnimationDuration={300}
           renderItem={({ item }) => (
-            <RuleComponent data={item} />
+            <QuoteComponent data={item} />
           )}
           onSnapToItem={(index) => setQuoteIndex(index)}
         />
