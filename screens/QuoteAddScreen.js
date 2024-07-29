@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors } from '../assets/colors/colors'
 import Header from '../components/general/Header'
@@ -8,6 +8,7 @@ import { marginTop15 } from '../assets/commonStyles'
 import Button from '../components/general/Button'
 import MultiSelect from '../components/general/MultiSelect'
 import { getAllCollections } from '../assets/data/collections'
+import { addQuote } from '../assets/data/quotes'
 import LoadingScreen from './LoadingScreen'
 
 const QuoteAddScreen = () => {
@@ -19,6 +20,7 @@ const QuoteAddScreen = () => {
     }
 
     const [loading, setLoading] = useState(true);
+    const [btnLoading, setBtnLoading] = useState(false);
     const [quote, setQuote] = useState(null);
     const [author, setAuthor] = useState(null);
     const [cols, setCols] = useState([]); //collections
@@ -38,6 +40,22 @@ const QuoteAddScreen = () => {
             setLoading(false);
         }
     }
+
+    const addNewQuote = async () => {
+        try {
+            setBtnLoading(true);
+            const res = await addQuote(quote, author);
+            if(res.stt == 'success'){
+                Alert.alert('Success', res.msg)
+            }else{
+                Alert.alert('Error', res.msg)
+            }
+        } catch (error) {
+            console.error('Error adding new quote:', error);
+        } finally {
+            setBtnLoading(false);
+        }
+    };
 
     if(loading){
         return <LoadingScreen/>
@@ -78,6 +96,9 @@ const QuoteAddScreen = () => {
                 <Button
                     bgColor={colors. bgColorSec}
                     content={<Text style={styles.btnTextStyles}>{(route.params ? 'Edit' : 'Add')}</Text>}
+                    func={addNewQuote}
+                    loading={btnLoading}
+                    loaderIconColor={colors.textColorSec}
                 />
             </View>
         </View>

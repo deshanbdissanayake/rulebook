@@ -1,12 +1,13 @@
-import { Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { colors } from '../assets/colors/colors'
-import Input from '../components/general/Input'
-import { marginTop15 } from '../assets/commonStyles'
-import Button from '../components/general/Button'
-import { loginFunc } from '../assets/data/auth'
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { colors } from '../assets/colors/colors';
+import Input from '../components/general/Input';
+import { marginTop15 } from '../assets/commonStyles';
+import Button from '../components/general/Button';
+import { loginFunc } from '../assets/data/auth';
 import { useAppContext } from '../context/AppContext';
-import LoadingScreen from './LoadingScreen'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createTables } from '../assets/data/database';
 
 const WelcomeScreen = () => {
   const { setIsLoggedIn } = useAppContext();
@@ -27,8 +28,13 @@ const WelcomeScreen = () => {
 
       // If validation passes, call the login function
       let res = await loginFunc(username, password);
-      console.log(res)
+      //console.log(res)
       setIsLoggedIn(res);
+
+      if (res) {
+        await createTables();
+        console.log('Tables checked/created');
+      }
     } catch (error) {
       console.error('Error at WelcomeScreen.js -> handleLogin: ', error);
       Alert.alert('Login Error', 'An error occurred during login.');
@@ -74,10 +80,10 @@ const WelcomeScreen = () => {
         />
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-export default WelcomeScreen
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -121,4 +127,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textColorSec,
   },
-})
+});
