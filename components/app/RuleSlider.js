@@ -8,8 +8,8 @@ import { getAllQuotes } from '../../assets/data/quotes';
 import { colors } from '../../assets/colors/colors'
 import MiniButton from '../general/MiniButton'
 
-import { marginRight10 } from '../../assets/commonStyles'
-import { Entypo, Ionicons } from '@expo/vector-icons'
+import { marginBottom10, marginBottom15, marginRight10 } from '../../assets/commonStyles'
+import { Entypo, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 const RuleSlider = () => {
   const navigation = useNavigation();
@@ -48,6 +48,11 @@ const RuleSlider = () => {
     }
   }
 
+  const hanldeRefreshQuotes = async () => {
+    setLoading(true);
+    await getData();
+  }
+
   const hanldeNewQuote = () => {
     navigation.navigate('Add Quote');
   }
@@ -82,6 +87,13 @@ const RuleSlider = () => {
         />
       )}
       <View style={styles.addBtnWrapper}>
+        <MiniButton
+          func={hanldeRefreshQuotes}
+          content={<MaterialCommunityIcons name="reload" size={24} color={colors.textColorPri} />}
+          bgColor={colors.bgColorPri}
+          btnStyles={true}
+          wrapperStyles={marginBottom10}
+        />
         <MiniButton
           func={hanldeNewQuote}
           content={<Entypo name="plus" size={24} color={colors.textColorPri} />}

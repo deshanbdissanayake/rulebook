@@ -47,6 +47,7 @@ const QuoteAddScreen = () => {
             const res = await addQuote(quote, author);
             if(res.stt == 'success'){
                 Alert.alert('Success', res.msg)
+                resetFunc(); //later redirect to quote list
             }else{
                 Alert.alert('Error', res.msg)
             }
@@ -56,6 +57,12 @@ const QuoteAddScreen = () => {
             setBtnLoading(false);
         }
     };
+
+    const resetFunc = () => {
+        setQuote(null);
+        setAuthor(null);
+        setSelectedCols([]);
+    }
 
     if(loading){
         return <LoadingScreen/>

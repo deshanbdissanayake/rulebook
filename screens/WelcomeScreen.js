@@ -28,13 +28,13 @@ const WelcomeScreen = () => {
 
       // If validation passes, call the login function
       let res = await loginFunc(username, password);
-      //console.log(res)
-      setIsLoggedIn(res);
 
       if (res) {
         await createTables();
         console.log('Tables checked/created');
+        setIsLoggedIn(res);
       }
+      
     } catch (error) {
       console.error('Error at WelcomeScreen.js -> handleLogin: ', error);
       Alert.alert('Login Error', 'An error occurred during login.');
