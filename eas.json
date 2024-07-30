@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "version": ">= 9.0.3"
-  },
   "build": {
     "development": {
       "developmentClient": true,
@@ -15,8 +12,5 @@
         "buildType": "apk"
       }
     }
-  },
-  "submit": {
-    "production": {}
   }
 }
