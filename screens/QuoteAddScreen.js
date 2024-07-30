@@ -10,19 +10,75 @@ import MultiSelect from '../components/general/MultiSelect'
 import { getAllCollections } from '../assets/data/collections'
 import { addQuote } from '../assets/data/quotes'
 import LoadingScreen from './LoadingScreen'
+import { getTableDataById } from '../assets/data/database'
 
 const QuoteAddScreen = () => {
     const navigation = useNavigation();
     const route = useRoute();
 
+    const [loading, setLoading] = useState(true);
+    const [btnLoading, setBtnLoading] = useState(false);
+    const [id, setId] = useState(null);
+    const [quote, setQuote] = useState(null);
+    const [author, setAuthor] = useState(null);
+
+    useEffect(()=>{
+        getQuoteById();
+    },[])
+
     const handleGoBack = () => {
         navigation.goBack();
     }
 
+    const resetFunc = () => {
+        setQuote(null);
+        setAuthor(null);
+    }
+
+    const addNewQuote = async () => {
+        if (!quote) {
+            Alert.alert('Error', 'Please add a quote.');
+            return;
+        }
+    
+        try {
+            setBtnLoading(true);
+            const res = await addQuote(id, quote, author);
+    
+            if (res.stt === 'success') {
+                const successAction = route.params 
+                    ? () => navigation.goBack() 
+                    : resetFunc;
+    
+                Alert.alert('Success', res.msg, [{ text: 'OK', onPress: successAction }]);
+            } else {
+                Alert.alert('Error', res.msg);
+            }
+        } catch (error) {
+            console.error('Error adding new quote:', error);
+            Alert.alert('Error', 'An unexpected error occurred.');
+        } finally {
+            setBtnLoading(false);
+        }
+    };      
+
+    const getQuoteById = async () => {
+        try {
+            if(route.params){
+                let res = await getTableDataById('quote', route.params.q_id);
+                setId(route.params.q_id);
+                setQuote(res.quote);
+                setAuthor(res.author);
+            }
+        } catch (error) {
+            console.error('error at QuoteAddScreen.js: ', error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    
+    /*
     const [loading, setLoading] = useState(true);
-    const [btnLoading, setBtnLoading] = useState(false);
-    const [quote, setQuote] = useState(null);
-    const [author, setAuthor] = useState(null);
     const [cols, setCols] = useState([]); //collections
     const [selectedCols, setSelectedCols] = useState([]); //collections
 
@@ -40,29 +96,7 @@ const QuoteAddScreen = () => {
             setLoading(false);
         }
     }
-
-    const addNewQuote = async () => {
-        try {
-            setBtnLoading(true);
-            const res = await addQuote(quote, author);
-            if(res.stt == 'success'){
-                Alert.alert('Success', res.msg)
-                resetFunc(); //later redirect to quote list
-            }else{
-                Alert.alert('Error', res.msg)
-            }
-        } catch (error) {
-            console.error('Error adding new quote:', error);
-        } finally {
-            setBtnLoading(false);
-        }
-    };
-
-    const resetFunc = () => {
-        setQuote(null);
-        setAuthor(null);
-        setSelectedCols([]);
-    }
+    */
 
     if(loading){
         return <LoadingScreen/>
@@ -71,26 +105,29 @@ const QuoteAddScreen = () => {
     return (
         <View style={styles.container}>
             <Header
-                text={(route.params ? 'Edit' : 'Add') + ' Quote'}
+                text={(route.params ? 'Edit' : 'Add') + ' Rule'}
                 handleGoBack={handleGoBack}
             />
             <View style={styles.formWrapper}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <Text style={styles.labelTextStyles}>Add your personal quotes below to keep yourself on track !</Text>
+                    <Text style={styles.labelTextStyles}>Add your personal rules below to keep yourself on track !</Text>
                     <Input
                         keyboardType={'default'}
                         onChangeText={(text) => setQuote(text)}
-                        placeholder={'Enter Quote'}
+                        placeholder={'Enter Rule'}
                         multiline={true}
                         textArea={true}
+                        value={quote}
                     />
                     <Input
                         keyboardType={'default'}
                         onChangeText={(text) => setAuthor(text)}
                         placeholder={'Enter Author (optional)'}
                         wrapperStyles={marginTop15}
+                        value={author}
                     />
-                    {(cols && cols.length) > 0 && (
+                    {
+                    /*(cols && cols.length) > 0 && (
                         <MultiSelect
                             options={cols}
                             wrapperStyles={marginTop15}
@@ -98,7 +135,8 @@ const QuoteAddScreen = () => {
                             placeholder={'Select Collections (optional)'}
                             itemName={'collections'}
                         />
-                    )}
+                    )*/
+                    }
                 </ScrollView>
                 <Button
                     bgColor={colors. bgColorSec}

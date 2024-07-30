@@ -10,6 +10,7 @@ import MiniButton from '../general/MiniButton'
 
 import { marginBottom10, marginBottom15, marginRight10 } from '../../assets/commonStyles'
 import { Entypo, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import NoData from '../general/NoData';
 
 const RuleSlider = () => {
   const navigation = useNavigation();
@@ -38,6 +39,7 @@ const RuleSlider = () => {
     try {
       let quotesData = await getAllQuotes();
       if(quotesData && quotesData.length > 0){
+        let shuffledData = await shuffle(quotesData);
         setQuotes(quotesData)
         setQuoteId(quotesData[0].id);
       }
@@ -46,6 +48,14 @@ const RuleSlider = () => {
     } finally {
       setLoading(false);
     }
+  }
+
+  const shuffle = async (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 
   const hanldeRefreshQuotes = async () => {
@@ -57,6 +67,7 @@ const RuleSlider = () => {
     navigation.navigate('Add Quote');
   }
 
+  /*
   const hanldeAddToCollection = () => {
     console.log('new quote');
   }
@@ -64,6 +75,7 @@ const RuleSlider = () => {
   const hanldeAddToFavourites = () => {
     console.log('fav');
   }
+  */
 
   if(loading){
     return <LoadingScreen/>
@@ -71,7 +83,7 @@ const RuleSlider = () => {
 
   return (
     <View style={styles.container}>
-      {(quotes && quotes.length > 0) && (
+      {(quotes && quotes.length > 0) ? (
         <Carousel
           loop
           width={width}
@@ -85,14 +97,18 @@ const RuleSlider = () => {
           )}
           onSnapToItem={(index) => setQuoteIndex(index)}
         />
+      ) : (
+        <NoData text={'No Rules Yet!'} onRefresh={hanldeRefreshQuotes} />
       )}
-      <View style={styles.addBtnWrapper}>
+      <View style={styles.leftBtnWrapper}>
+      </View>
+      <View style={styles.rightBtnWrapper}>
         <MiniButton
           func={hanldeRefreshQuotes}
           content={<MaterialCommunityIcons name="reload" size={24} color={colors.textColorPri} />}
           bgColor={colors.bgColorPri}
           btnStyles={true}
-          wrapperStyles={marginBottom10}
+          wrapperStyles={marginRight10}
         />
         <MiniButton
           func={hanldeNewQuote}
@@ -100,9 +116,7 @@ const RuleSlider = () => {
           bgColor={colors.bgColorPri}
           btnStyles={true}
         />
-      </View>
-      <View style={styles.favBtnWrapper}>
-        <MiniButton
+        {/* <MiniButton
           func={hanldeAddToCollection}
           content={<Ionicons name="copy-outline" size={24} color={colors.textColorPri} />}
           bgColor={colors.bgColorPri}
@@ -114,7 +128,7 @@ const RuleSlider = () => {
           content={<Ionicons name="heart-outline" size={24} color={colors.textColorPri} />}
           bgColor={colors.bgColorPri}
           btnStyles={true}
-        />
+        /> */}
       </View>
     </View>
   )
@@ -129,13 +143,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  addBtnWrapper: {
+  leftBtnWrapper: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     zIndex: 1,
   },
-  favBtnWrapper:{
+  rightBtnWrapper:{
     position: 'absolute',
     flexDirection: 'row',
     bottom: 0,

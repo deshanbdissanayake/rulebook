@@ -1,16 +1,33 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { Image, StyleSheet, Text, View, ScrollView, RefreshControl } from 'react-native';
+import React, { useState } from 'react';
 import { colors } from '../../assets/colors/colors';
 import { Feather } from '@expo/vector-icons';
 
-const NoData = ({ text = 'No Data', showImg = true }) => {
+const NoData = ({ text = 'No Data', showImg = true, onRefresh = null }) => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefreshFunc = async () => {
+    setRefreshing(true);
+    // Simulate a network request or data fetching
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setRefreshing(false);
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={!onRefresh ? onRefreshFunc : onRefresh}
+        />
+      }
+    >
       {showImg && (
         <Feather name="cloud-off" size={80} color={colors.textColorPri} />
       )}
       <Text style={styles.textStyles}>{text}</Text>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -32,9 +49,5 @@ const styles = StyleSheet.create({
     color: colors.textColorPri,
     textAlign: 'center',
     marginTop: 10,
-  },
-  imageStyles: {
-    width: 150,
-    height: 150,
   },
 });

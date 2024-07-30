@@ -150,7 +150,7 @@ const DraverNav = () => {
           headerShown: false,
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Collections"
         component={CollectionNav}
         options={{
@@ -197,7 +197,7 @@ const DraverNav = () => {
           ),
           headerShown: false,
         }}
-      />
+      /> */}
     </Drawer.Navigator>
   );
 };

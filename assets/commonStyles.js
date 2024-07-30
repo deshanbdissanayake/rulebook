@@ -72,6 +72,7 @@ const flex4 = { flex: 4 }
 const flex5 = { flex: 5 } 
 const flexGrow1 = { flexGrow: 1 }
 const flexRow = { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }
+const flexRowEnd = { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }
 const flexWrapper = { flexDirection: 'row', flexWrap: 'wrap' }
 
 const labelTextStyles = { marginBottom: 5, marginLeft: 2, fontFamily: 'ms-light', fontSize: 12, color: colors.textColorPri }
@@ -120,6 +121,7 @@ export {
     flex5,
     flexGrow1,
     flexRow,
+    flexRowEnd,
     flexWrapper,
     container,
     textLight10,
