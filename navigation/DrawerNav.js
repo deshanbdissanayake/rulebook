@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -25,13 +25,24 @@ import QuoteNav from './QuoteNav';
 import CollectionNav from './CollectionNav';
 import FavouritesNav from './FavouritesNav';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import LoadingScreen from '../screens/LoadingScreen';
+import { getAsyncData } from '../assets/data/async_storage';
 
 const Drawer = createDrawerNavigator();
 
 // Custom drawer content component
 const CustomDrawerContent = ({ navigation, state, descriptors }) => {
-
   const { setIsLoggedIn } = useAppContext();
+  
+  const [username, setUsername] = useState('Guest');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getAsyncDataFunc();
+    };
+  
+    fetchData();
+  }, []);  
 
   const closeDrawer = () => {
     navigation.closeDrawer();
@@ -60,6 +71,15 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
     setIsLoggedIn(false);
   }
 
+  const getAsyncDataFunc = async () => {
+    try {
+      let res = await getAsyncData('username');
+      setUsername(res);
+    } catch (error) {
+      console.error('error at DrawerNav.js: ', error)
+    }
+  }
+
   return (
     <DrawerContentScrollView
       contentContainerStyle={styles.drawerWrapper}
@@ -74,7 +94,7 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
             />
           </View>
           <View style={styles.profileTextWrapper}>
-            <Text style={styles.profileText}>Hello Desh</Text>
+            <Text style={styles.profileText}>Hello {username}</Text>
           </View>
           <TouchableOpacity style={styles.drawerClose} onPress={closeDrawer} >
             <Ionicons name="close" size={24} color={colors.textColorPri} />

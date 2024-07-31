@@ -41,6 +41,7 @@ export const createTables = async () => {
           console.log('Quote table created successfully');
           // Insert initial quotes after creating the table
           //insertInitialQuotes().then(resolve).catch(reject);
+          resolve();
         },
         (_, error) => {
           console.error('Error creating quote table:', error.message);

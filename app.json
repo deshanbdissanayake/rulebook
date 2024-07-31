@@ -22,15 +22,15 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.deshanbdissanayake.snackc546d7af0f4448adb3e5a7755b4ed6e9"
+      "package": "com.desh1234.snackc546d7af0f4448adb3e5a7755b4ed6e9"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "deshanbdissanayake",
+    "owner": "desh1234",
     "extra": {
       "eas": {
-        "projectId": "cfe27b3b-3c61-49ea-a2bd-383c349fd9bf"
+        "projectId": "6407da06-e330-494a-a1c2-afd9dd1e95f3"
       }
     }
   }

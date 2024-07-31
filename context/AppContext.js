@@ -1,10 +1,12 @@
 // AppContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { getAsyncData } from '../assets/data/async_storage';
+import SplashScreen from '../screens/SplashScreen';
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [navType, setNavType] = useState('drawer');
@@ -24,8 +26,15 @@ export const AppProvider = ({ children }) => {
         }
     } catch (error) {
         console.error('Error at AppContext.js -> checkUserExist: ', error);
+    } finally {
+      setLoading(false);
     }
   };
+
+
+  if(loading){
+    return <SplashScreen/>
+  }
 
   return (
     <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, navType, setNavType, userType, setUserType }}>

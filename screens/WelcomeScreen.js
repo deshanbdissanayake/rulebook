@@ -6,7 +6,6 @@ import { marginTop15 } from '../assets/commonStyles';
 import Button from '../components/general/Button';
 import { loginFunc } from '../assets/data/auth';
 import { useAppContext } from '../context/AppContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createTables } from '../assets/data/database';
 
 const WelcomeScreen = () => {
