@@ -7,12 +7,12 @@ const colorsDark = {
   textColorSec: '#373737',
   textColorTer: '#373737',
 
+  border : '#fff7fa',
+
   white : '#FFFFFF',
   black : '#000000',
   gray : '#d6d6d6', 
   disabled: '#f2f2f2',
-
-  border : '#fff7fa',
 
   primary : '#E0115F', //pink
   primaryLight : '#f7faff', //light blue

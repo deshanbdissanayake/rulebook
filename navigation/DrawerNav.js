@@ -154,6 +154,23 @@ const DraverNav = () => {
           headerShown: false,
         }}
       />
+      
+      <Drawer.Screen
+        name="Collections"
+        component={CollectionNav}
+        options={{
+          drawerLabel: 'Collections',
+          drawerLabelStyle: { fontFamily: 'ms-regular' },
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? 'copy' : 'copy-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
       <Drawer.Screen
         name="Quotes"
         component={QuoteNav}
@@ -163,22 +180,6 @@ const DraverNav = () => {
           drawerIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? 'add-circle' : 'add-circle-outline'}
-              size={size}
-              color={color}
-            />
-          ),
-          headerShown: false,
-        }}
-      />
-      {/* <Drawer.Screen
-        name="Collections"
-        component={CollectionNav}
-        options={{
-          drawerLabel: 'Collections',
-          drawerLabelStyle: { fontFamily: 'ms-regular' },
-          drawerIcon: ({ focused, color, size }) => (
-            <Ionicons
-              name={focused ? 'copy' : 'copy-outline'}
               size={size}
               color={color}
             />
@@ -217,7 +218,7 @@ const DraverNav = () => {
           ),
           headerShown: false,
         }}
-      /> */}
+      /> 
     </Drawer.Navigator>
   );
 };
