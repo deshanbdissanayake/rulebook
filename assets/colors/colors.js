@@ -8,12 +8,16 @@ const colorsDark = {
   textColorTer: '#373737',
 
   border : '#fff7fa',
+  gray : '#d6d6d6', 
+
+
+//=======================================
+
 
   white : '#FFFFFF',
   black : '#000000',
-  gray : '#d6d6d6', 
+ 
   disabled: '#f2f2f2',
-
   primary : '#E0115F', //pink
   primaryLight : '#f7faff', //light blue
 

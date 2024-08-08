@@ -79,6 +79,16 @@ const CollectionListScreen = () => {
             )
         );
     };
+
+    const handleEditBtnPress = (id) => {
+        //add follow function to save in db
+       Alert.alert('Edit pressed')
+    };
+
+    const handleDeleteBtnPress = (id) => {
+        //add follow function to save in db
+        Alert.alert('Delete pressed')
+    };
     
 
     if(loading){
@@ -110,7 +120,14 @@ const CollectionListScreen = () => {
                 <FlatList
                     data={cols}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => <CollectionItem itemData={item} handleFollowBtnPress={handleFollowBtnPress} />}
+                    renderItem={({ item }) => (
+                        <CollectionItem 
+                            itemData={item} 
+                            handleFollowBtnPress={handleFollowBtnPress} 
+                            handleEditBtnPress={handleEditBtnPress}
+                            handleDeleteBtnPress={handleDeleteBtnPress}
+                        />
+                    )}
                     showsVerticalScrollIndicator={false}
                     refreshing={refreshing}
                     onRefresh={onRefresh}

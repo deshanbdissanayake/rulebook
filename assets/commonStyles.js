@@ -25,6 +25,9 @@ const justifyCenter = { justifyContent: 'center', alignItems: 'center', textAlig
 const justifyBetween = { justifyContent: 'space-between', alignItems: 'center'}
 const alignCenter = { alignItems: 'center' }
 
+const margin5 = { margin: 5 }
+const margin10 = { margin: 10 }
+const margin15 = { margin: 15 }
 const marginLeft2 = { marginLeft: 2 }
 const marginTop5 = { marginTop: 5 }
 const marginTop10 = { marginTop: 10 }
@@ -46,6 +49,9 @@ const marginHorizontal5 = { marginHorizontal: 5 }
 const marginHorizontal10 = { marginHorizontal: 10 }
 const marginHorizontal15 = { marginHorizontal: 15 }
 
+const padding5 = { padding: 5 }
+const padding10 = { padding: 10 }
+const padding15 = { padding: 15 }
 const paddingTop5 = { paddingTop: 5 }
 const paddingTop10 = { paddingTop: 10 }
 const paddingTop15 = { paddingTop: 15 }
@@ -109,6 +115,12 @@ const borderLeft = { borderLeftWidth: 1, borderLeftColor: colors.border }
 const borderRight = { borderRightWidth: 1, borderRightColor: colors.border }
 const borderVertical = { borderTopWidth: 1, borderTopColor: colors.border, borderBottomWidth: 1, borderBottomColor: colors.border }
 const borderHorizontal = { borderLeftWidth: 1, borderLeftColor: colors.border, borderRightWidth: 1, borderRightColor: colors.border }
+const borderTopDark = { borderTopWidth: 0.5, borderTopColor: colors.textColorSec }
+const borderBottomDark = { borderBottomWidth: 0.5, borderBottomColor: colors.textColorSec }
+const borderLeftDark = { borderLeftWidth: 0.5, borderLeftColor: colors.textColorSec }
+const borderRightDark = { borderRightWidth: 0.5, borderRightColor: colors.textColorSec }
+const borderVerticalDark = { borderTopWidth: 0.5, borderTopColor: colors.textColorSec, borderBottomWidth: 1, borderBottomColor: colors.border }
+const borderHorizontalDark = { borderLeftWidth: 0.5, borderLeftColor: colors.textColorSec, borderRightWidth: 1, borderRightColor: colors.border }
 const borderRound5 = { borderWidth: 1, borderColor: colors.border, borderRadius: 5 }
 const borderRound10 = { borderWidth: 1, borderColor: colors.border, borderRadius: 10 }
 const borderRound50 = { borderWidth: 1, borderColor: colors.border, borderRadius: 50 }
@@ -140,6 +152,9 @@ export {
     justifyCenter,
     justifyBetween,
     alignCenter,
+    margin5,
+    margin10,
+    margin15,
     marginLeft2,
     marginTop5,
     marginTop10,
@@ -160,6 +175,9 @@ export {
     marginHorizontal5,
     marginHorizontal10,
     marginHorizontal15,
+    padding5,
+    padding10,
+    padding15,
     paddingTop5,
     paddingTop10,
     paddingTop15,
@@ -197,4 +215,11 @@ export {
     borderRound5,
     borderRound10,
     borderRound50,
+
+    borderTopDark,
+    borderBottomDark,
+    borderLeftDark,
+    borderRightDark,
+    borderVerticalDark,
+    borderHorizontalDark,
  }
